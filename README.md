@@ -69,7 +69,7 @@ Dashboard
   Face detector          InsightFace SCRFD
   Numerical processing   NumPy
   API documentation      OpenAPI / Swagger / ReDoc
-  Future client          Flutter
+  Future client          Flutter, Web
 
 ## Architecture
 
@@ -195,7 +195,7 @@ Configure the database connection using the variables expected by
 A typical configuration is:
 
 ``` env
-DATABASE_URL=postgresql+psycopg://username:password@localhost:5432/attendance_ai
+DATABASE_URL=postgresql+psycopg://username:password@your_ip:port/db_name
 ```
 
 Do not commit passwords or other secrets to Git.
@@ -207,7 +207,7 @@ Create a `.env` file when required by the application.
 Example:
 
 ``` env
-DATABASE_URL=postgresql+psycopg://username:password@localhost:5432/attendance_ai
+DATABASE_URL=postgresql+psycopg://username:password@your_ip:port/db_name
 DEBUG=true
 SCRFD_CTX_ID=0
 ```
