@@ -1,4 +1,3 @@
-# face-ai-service
 # AI Face Platform
 
 AI-powered employee face recognition and attendance management backend
