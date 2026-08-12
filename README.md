@@ -47,7 +47,6 @@ face-ai-service/
 * FaceNet / FaceNet512
 * NumPy
 * REST API
-* Virtual Environment (`venv312`)
 
 ## Face Recognition Models
 
@@ -218,3 +217,4 @@ The Face AI Service is being developed as an AI backend/service component for in
 ## License
 
 Add the appropriate license information here when the project license is finalized.
+
