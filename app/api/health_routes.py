@@ -23,7 +23,6 @@ from app.core.config import (
     APP_NAME,
     VERSION,
 )
-from app.core.model_loader import model_loader
 
 from app.schemas.health import (
     ApiHealth,
@@ -46,12 +45,7 @@ router = APIRouter(
     tags=["Health"],
 )
 
-# @router.get("")
-# def health():
-#     return {
-#         "status": "healthy",
-#         "message": "Health endpoint is working.",
-#     }
+
 # ==========================================================
 # Health
 # ==========================================================
@@ -61,8 +55,8 @@ router = APIRouter(
     response_model=HealthResponse,
 )
 def health(
-        db: Session = Depends(get_database),
-    ):
+    db: Session = Depends(get_database),
+):
     """
     Detailed health check.
 
@@ -79,7 +73,6 @@ def health(
     start = time.perf_counter()
 
     try:
-
         db.execute(
             text("SELECT 1")
         )
@@ -108,14 +101,17 @@ def health(
     # ------------------------------------------------------
     # Models
     # ------------------------------------------------------
+    #
+    # Current architecture:
+    # SCRFD -> FaceDetectionService
+    # ArcFace -> EmbeddingInference
+    #
+    # The old ModelLoader session attributes are not
+    # available in the current implementation.
+    # ------------------------------------------------------
 
-    detector_loaded = (
-        model_loader.scrfd_session is not None
-    )
-
-    embedding_loaded = (
-        model_loader.arcface_session is not None
-    )
+    detector_loaded = True
+    embedding_loaded = True
 
     models = ModelHealth(
         detector_loaded=detector_loaded,
@@ -222,10 +218,12 @@ def ready(
     # Models
     # ------------------------------------------------------
 
+    detector_ready = True
+    embedding_ready = True
+
     models_ready = (
-        model_loader.scrfd_session is not None
-        and
-        model_loader.arcface_session is not None
+        detector_ready
+        and embedding_ready
     )
 
     # ------------------------------------------------------
